@@ -1,0 +1,62 @@
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+
+
+export const Navbar = () => {
+
+    // CustomeHook realizado por react-router-dom
+    const navigate = useNavigate();
+
+    const onLogOut = () => {
+        //
+        navigate('/login', {
+            // evita que la persona se regrese a la ruta anterior porque literlmente se esta reemplazando y hace que no exista la anterior
+            replace: true,
+        });
+    }
+
+    return (
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-2">
+            
+            <Link 
+                className="navbar-brand" 
+                to="/"
+            >
+                Asociaciones
+            </Link>
+
+            <div className="navbar-collapse">
+                <div className="navbar-nav">
+
+                    <NavLink 
+                        className={ ({ isActive }) => `nav-link nav-item ${ isActive ? 'active' : '' }` } 
+                        to="/marvel"
+                    >
+                        Marvel
+                    </NavLink>
+
+                    <NavLink 
+                        className={ ({ isActive }) => `nav-link nav-item ${ isActive ? 'active' : '' }` } 
+                        to="/dc"
+                    >
+                        DC
+                    </NavLink>
+                    <NavLink 
+                        className={ ({ isActive }) => `nav-link nav-item ${ isActive ? 'active' : '' }` } 
+                        to="/buscar"
+                    >
+                        Buscar
+                    </NavLink>
+                </div>
+            </div>
+
+            <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flec justify-content-end">
+                <ul className="navbar-nav ml-auto">
+                    <span className='nav-item nav-link text-primary' > Fernando </span>
+                    <button className='nav-item nav-link btn' onClick={ onLogOut } >
+                        LogOut
+                    </button>
+                </ul>
+            </div>
+        </nav>
+    )
+}
